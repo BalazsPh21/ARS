@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="arc_transmission">
+        
+        <transmission name="LEFT_FRONT_WHEEL_TRANS" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="LEFT_FRONT_WHEEL_JOINT">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="LEFT_FRONT_ACTUATOR">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>${transmission_reduction}</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="RIGHT_FRONT_WHEEL_TRANS" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="RIGHT_FRONT_WHEEL_JOINT">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="RIGHT_FRONT_ACTUATOR">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>${transmission_reduction}</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="LEFT_HINGE_TRANS">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="LEFT_HINGE_JOINT">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="LEFT_HINGE_ACTUATOR">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="RIGHT_HINGE_TRANS">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="RIGHT_HINGE_JOINT">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="RIGHT_HINGE_ACTUATOR">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="LEFT_REAR_WHEEL_TRANS" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="LEFT_REAR_WHEEL_JOINT">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="LEFT_REAR_ACTUATOR">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>${transmission_reduction}</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="RIGHT_REAR_WHEEL_TRANS" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="RIGHT_REAR_WHEEL_JOINT">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="RIGHT_REAR_ACTUATOR">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>${transmission_reduction}</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+    </xacro:macro>
+
+</robot>

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
     <xacro:macro name="cylinder_inertia" params="m r h">
         <inertia
             ixx="${m*(3*r*r+h*h)/12}"
@@ -10,6 +11,7 @@
             izz="${m*r*r/2}"
         />
     </xacro:macro>
+    
     <xacro:macro name="box_inertia" params="m x y z">
         <inertia
             ixx="${m*(y*y+z*z)/12}"
@@ -20,6 +22,7 @@
             izz="${m*(x*x+z*z)/12}"
         />
     </xacro:macro>
+    
     <xacro:macro name="sphere_inertia" params="m r">
         <inertia
             ixx="${2*m*r*r/5}"

@@ -28,6 +28,115 @@
   <material name="white">
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
+  <!-- IMU -->
+  <gazebo reference="imu_link">
+    <sensor name="imu_sensor" type="imu">
+      <always_on>1</always_on>
+      <update_rate>400</update_rate>
+      <ignition_frame_id>arv/imu_link</ignition_frame_id>
+      <visualize>true</visualize>
+      <topic>/imu</topic>
+    </sensor>
+  </gazebo>
+  <!-- LIDAR -->
+  <gazebo reference="lidar_link">
+    <sensor name="gpu_lidar" type="gpu_lidar">
+      <topic>/scan</topic>
+      <update_rate>400</update_rate>
+      <ignition_frame_id>arv/lidar_link</ignition_frame_id>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>640</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.396263</min_angle>
+            <max_angle>1.396263</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0.0</min_angle>
+            <max_angle>0.0</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.08</min>
+          <max>10</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.001</stddev>
+        </noise>
+      </lidar>
+      <alwaysOn>1</alwaysOn>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+  <!--            Wheels        -->
+  <!-- Left front wheel -->
+  <gazebo reference="LEFT_FRONT_WHEEL">
+    <mu1 value="0.8"/>
+    <mu2 value="0.8"/>
+    <fdir1 value="1 0 0"/>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.005</minDepth>
+    <maxVel>100.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <!-- Right front wheel -->
+  <gazebo reference="RIGHT_FRONT_WHEEL">
+    <mu1 value="0.8"/>
+    <mu2 value="0.8"/>
+    <fdir1 value="1 0 0"/>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.005</minDepth>
+    <maxVel>100.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <!-- Left rear wheel -->
+  <gazebo reference="LEFT_REAR_WHEEL">
+    <mu1 value="0.8"/>
+    <mu2 value="0.8"/>
+    <fdir1 value="1 0 0"/>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.005</minDepth>
+    <maxVel>100.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <!-- Right rear wheel -->
+  <gazebo reference="RIGHT_REAR_WHEEL">
+    <mu1 value="0.8"/>
+    <mu2 value="0.8"/>
+    <fdir1 value="1 0 0"/>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.005</minDepth>
+    <maxVel>100.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <!-- Left hinge -->
+  <gazebo reference="LEFT_WHEEL_HINGE">
+    <mu1 value="0.0"/>
+    <mu2 value="0.0"/>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <fdir1 value="0 1 0"/>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <!-- Right hinge -->
+  <gazebo reference="RIGHT_WHEEL_HINGE">
+    <mu1 value="0.0"/>
+    <mu2 value="0.0"/>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <fdir1 value="0 1 0"/>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
   <link name="base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
