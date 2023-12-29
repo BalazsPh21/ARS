@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot name="arc" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="IMU" params="base_link">
+
+        <!-- Imu is fixed to the base link -->
+        <joint name="imu_joint" type="fixed">
+            <origin xyz="${imu_origin_xyz}" rpy="${imu_origin_rpy}"/>
+            <parent link="${base_link}"/>
+            <child link="imu_link"/>
+        </joint>
+
+        <!-- Imu link -->
+        <link name="imu_link">
+            <inertial>
+                <mass value="${imu_mass}"/>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <xacro:box_inertia m="${imu_mass}" x="${imu_x}" y="${imu_x}" z="${imu_x}"/>
+            </inertial>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="${imu_size}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="${imu_size}"/>
+                </geometry>
+            </collision>
+        </link>
+
+    </xacro:macro> 
+</robot> 

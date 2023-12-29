@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="arc">
+
+    <xacro:property name="base_link_name" value="base_link"/>
+
+    <xacro:property name="chassisHeight" value="0.075"/>
+    <xacro:property name="chassisLength" value="0.570"/>
+    <xacro:property name="chassisWidth" value="0.290"/>
+    <xacro:property name="chassisMass" value="2.300"/>
+
+    <xacro:property name="hingeMass" value="0.030"/>
+    <xacro:property name="hingeRadius" value="0.010"/>
+    <xacro:property name="hingeLength" value="0.030"/>
+    <xacro:property name="hingeX" value="0.162"/>
+
+    <xacro:property name="wheelWidth" value="0.037"/>
+    <xacro:property name="wheelRadius" value="0.055"/>
+    <xacro:property name="backWheelX" value="-0.162"/>
+    <xacro:property name="wheelClearance" value="0.01"/>
+    <xacro:property name="wheelHeight" value="0.008"/>
+    <xacro:property name="wheelMass" value="0.08"/>
+
+</robot>

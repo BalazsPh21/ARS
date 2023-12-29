@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="PI" value="3.1415926535897931"/>
+    <xacro:property name="base_link_name" value="base_link"/>
+    
+    <!-- Chassis properties -->
+    <xacro:property name="chassisHeight" value="0.075"/>
+    <xacro:property name="chassisLength" value="0.570"/>
+    <xacro:property name="chassisWidth" value="0.290"/>
+    <xacro:property name="chassisMass" value="2.300"/>
+
+    <!-- Hinge properties -->
+    <xacro:property name="hingeMass" value="0.030"/>
+    <xacro:property name="hingeRadius" value="0.010"/>
+    <xacro:property name="hingeLength" value="0.030"/>
+    <xacro:property name="hingeX" value="0.162"/>
+
+    <!-- Wheel properties -->
+    <xacro:property name="wheelWidth" value="0.037"/>
+    <xacro:property name="wheelRadius" value="0.055"/>
+    <xacro:property name="backWheelX" value="-0.162"/>
+    <xacro:property name="wheelClearance" value="0.01"/>
+    <xacro:property name="wheelHeight" value="0.008"/>
+    <xacro:property name="wheelMass" value="0.08"/>
+
+    <!-- LIDAR properties -->
+    <xacro:property name="lidar_origin_rpy"		value="0 0 0"/>
+    <xacro:property name="lidar_origin_xyz"		value="${hingeX} 0 ${chassisHeight/2.0+0.05}"/>
+    <xacro:property name="lidar_height"		value="0.0717"/>
+    <xacro:property name="lidar_radius"		value="0.0516"/>
+    <xacro:property name="lidar_mass"		value="0.15"/>
+    <xacro:property name="lidar_update_rate"		value="400"/>
+    <xacro:property name="lidar_topic" 			value="/scan"/>
+
+    <!-- IMU properties -->
+    <xacro:property name="imu_origin_rpy"		value="0 0 0"/>
+    <xacro:property name="imu_origin_xyz"		value="${backWheelX} 0 ${chassisHeight/2.0+0.005}"/>
+    <xacro:property name="imu_mass"		value="0.1"/>
+    <xacro:property name="imu_x"		value="0.04"/>
+    <xacro:property name="imu_y"		value="0.05"/>
+    <xacro:property name="imu_z"		value="0.02"/>
+    <xacro:property name="imu_size"		value="${imu_x} ${imu_y} ${imu_z}"/>
+    <xacro:property name="imu_update_rate"		value="400"/>
+    <xacro:property name="imu_topic" 			value="/imu"/>
+
+</robot>

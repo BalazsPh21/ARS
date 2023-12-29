@@ -1,4 +1,4 @@
-# Autonomous Car Racing Simulation
+# Autonomous Racing Simulation
 
 ## Overview
 

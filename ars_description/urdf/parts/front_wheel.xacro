@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="front_wheel" params="prefix X Y friction_coeff:=0.7 transmission_reduction:=1" >
+        
+        <joint name="${prefix}_FRONT_WHEEL_JOINT" type="continuous">
+            <parent link="${prefix}_HINGE"/>
+            <child link="${prefix}_FRONT_WHEEL"/>
+            <origin xyz="0 0 ${Y}" rpy="0 0 0" />
+            <axis xyz="0 0 1" rpy="0 0 0" />
+            <dynamics damping="0.0" friction="0.0"/>
+            <limit effort="100" velocity="200"/>
+            <joint_properties damping="0.2" friction="0.2"/>
+        </joint>
+
+        <link name="${prefix}_FRONT_WHEEL">
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${wheelWidth}" radius="${wheelRadius}"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${wheelWidth}" radius="${wheelRadius}"/>
+                </geometry>
+            </visual>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="${wheelMass}"/>
+                <xacro:cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelWidth}"/>
+            </inertial>
+        </link>
+
+    </xacro:macro>
+</robot>

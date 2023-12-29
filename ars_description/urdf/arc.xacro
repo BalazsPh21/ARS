@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot name="arc" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find ars_description)/urdf/materials.xacro" />
+    <xacro:include filename="$(find ars_description)/urdf/properties.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/macros.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/parts/chassis.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/parts/hinge.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/parts/front_wheel.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/parts/rear_wheel.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/sensors/imu.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/sensors/lidar.xacro"/>
+
+    <xacro:chassis/>
+    
+    <xacro:hinge prefix="LEFT" 
+        X = "${hingeX}"
+        Y = "${chassisWidth/2+hingeLength/2}"/>
+
+    <xacro:hinge prefix="RIGHT" 
+        X = "${hingeX}"
+        Y = "${-chassisWidth/2-hingeLength/2}"/>
+
+    <xacro:front_wheel prefix="LEFT" 
+        X="0"
+        Y="${hingeLength/2+wheelWidth/2}"
+        friction_coeff="0.5"/>
+
+    <xacro:front_wheel prefix="RIGHT" 
+        X="0"
+        Y="${-hingeLength/2-wheelWidth/2}"
+        friction_coeff="0.5"/>
+    
+    <xacro:rear_wheel prefix="LEFT"
+        X="${backWheelX}"
+        Y="${chassisWidth/2+wheelClearance+wheelWidth/2}"
+        friction_coeff="0.0"/>
+
+    <xacro:rear_wheel prefix="RIGHT" 
+        X="${backWheelX}"
+        Y="${-chassisWidth/2-wheelClearance-wheelWidth/2}"
+        friction_coeff="0.0"/>
+    
+    <xacro:IMU base_link="${base_link_name}"/>
+    
+    <xacro:LIDAR base_link="${base_link_name}"/>
+        
+</robot>
