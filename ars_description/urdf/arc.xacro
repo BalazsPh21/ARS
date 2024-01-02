@@ -10,8 +10,8 @@
     <xacro:include filename="$(find ars_description)/urdf/parts/rear_wheel.xacro"/>
     <xacro:include filename="$(find ars_description)/urdf/sensors/imu.xacro"/>
     <xacro:include filename="$(find ars_description)/urdf/sensors/lidar.xacro"/>
-    <xacro:include filename="$(find ars_description)/urdf/arc.gazebo"/>
-    <xacro:include filename="$(find ars_description)/urdf/arc_transmissions.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/gazebo.xacro"/>
+    <xacro:include filename="$(find ars_description)/urdf/transmissions.xacro"/>
 
     <xacro:chassis/>
     
@@ -25,23 +25,19 @@
 
     <xacro:front_wheel prefix="LEFT" 
         X="0"
-        Y="${hingeLength/2+wheelWidth/2}"
-        friction_coeff="0.5"/>
+        Y="${hingeLength/2+wheelWidth/2}"/>
 
     <xacro:front_wheel prefix="RIGHT" 
         X="0"
-        Y="${-hingeLength/2-wheelWidth/2}"
-        friction_coeff="0.5"/>
+        Y="${-hingeLength/2-wheelWidth/2}"/>
     
     <xacro:rear_wheel prefix="LEFT"
         X="${backWheelX}"
-        Y="${chassisWidth/2+wheelClearance+wheelWidth/2}"
-        friction_coeff="0.0"/>
+        Y="${chassisWidth/2+wheelClearance+wheelWidth/2}"/>
 
     <xacro:rear_wheel prefix="RIGHT" 
         X="${backWheelX}"
-        Y="${-chassisWidth/2-wheelClearance-wheelWidth/2}"
-        friction_coeff="0.0"/>
+        Y="${-chassisWidth/2-wheelClearance-wheelWidth/2}"/>
     
     <xacro:IMU base_link="${base_link_name}"/>
     

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>ars_description</name>
+  <name>ars_bringup</name>
   <version>0.0.0</version>
-  <description>Description files for the autonomous racing simulation project</description>
+  <description>Contains launch files for the autonomous racing simulator project</description>
   <maintainer email="balazsph@outlook.hu">Balazs Tuba</maintainer>
   <license>TODO</license>
   <author>Balazs Tuba</author>
 
-  <depend>ign_ros2_control</depend>
+  <depend>ars_description</depend>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

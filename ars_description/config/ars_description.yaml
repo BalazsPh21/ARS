@@ -1,0 +1,28 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    ackermann_steering_controller:
+      type: ackermann_steering_controller/AckermannSteeringController
+
+
+ackermann_steering_controller:
+  ros__parameters:
+
+    reference_timeout: 2.0
+    front_steering: true
+    open_loop: false
+    velocity_rolling_window_size: 10
+    position_feedback: false
+    use_stamped_vel: true
+    rear_wheels_names: [RIGHT_REAR_WHEEL_JOINT, LEFT_REAR_WHEEL_JOINT]
+    front_wheels_names: [RIGHT_HINGE_JOINT, LEFT_HINGE_JOINT]
+    
+    wheelbase: 3.24644
+    front_wheel_track: 2.12321
+    rear_wheel_track: 1.76868
+    front_wheels_radius: 0.055
+    rear_wheels_radius: 0.055
