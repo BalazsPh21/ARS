@@ -21,8 +21,8 @@ ackermann_steering_controller:
     rear_wheels_names: [RIGHT_REAR_WHEEL_JOINT, LEFT_REAR_WHEEL_JOINT]
     front_wheels_names: [RIGHT_HINGE_JOINT, LEFT_HINGE_JOINT]
     
-    wheelbase: 3.24644
-    front_wheel_track: 2.12321
-    rear_wheel_track: 1.76868
+    wheelbase: 0.324
+    front_wheel_track: 0.387
+    rear_wheel_track: 0.387
     front_wheels_radius: 0.055
     rear_wheels_radius: 0.055

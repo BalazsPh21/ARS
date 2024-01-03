@@ -130,8 +130,8 @@
         <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
 
-    <!--            Car Parts           -->
-    
+
+    <!--            Car Parts           -->    
     <!-- Left front wheel -->
     <gazebo reference="LEFT_FRONT_WHEEL">
         <mu1 value="${friction_coeff}"/>
