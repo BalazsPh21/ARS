@@ -8,6 +8,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 
 import xacro
 
@@ -66,21 +67,33 @@ def generate_launch_description():
     )
 
     # Bridge
+    pkg_project_bringup = get_package_share_directory('ars_bringup')
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock'],
+        parameters=[{
+            'config_file': os.path.join(pkg_project_bringup, 'config', 'ros_gz_bridge.yaml'),
+            'qos_overrides./tf_static.publisher.durability': 'transient_local',
+        }],
         output='screen'
     )
 
+    rviz = Node(
+       package='rviz2',
+       executable='rviz2',
+       arguments=['-d', os.path.join(pkg_project_bringup, 'config', 'ars.rviz')],
+       condition=IfCondition(LaunchConfiguration('rviz'))
+    )
 
     # Launch!
     return LaunchDescription([
         gazebo,
+        DeclareLaunchArgument('rviz', default_value='true',
+                              description='Open RViz.'),
         bridge,
         robot_state_publisher,
         spawn_entity,
         joint_state_broadcaster,
         ackermann_steering_controller,
-        #load_joint_state_broadcaster
+        rviz
     ])

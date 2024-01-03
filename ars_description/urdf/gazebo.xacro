@@ -60,6 +60,15 @@
         <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
             <parameters>$(find ars_description)/config/ars_description.yaml</parameters>
         </plugin>
+        <plugin
+            filename="ignition-gazebo-imu-system"
+            name="ignition::gazebo::systems::Imu">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-sensors-system"
+            name="ignition::gazebo::systems::Sensors">
+            <render_engine>ogre2</render_engine>
+        </plugin>
     </gazebo>
 
 
@@ -70,10 +79,13 @@
         <sensor name="imu_sensor" type="imu">
             <always_on>1</always_on>
             <update_rate>${imu_update_rate}</update_rate>
-            <ignition_frame_id>arv/imu_link</ignition_frame_id>
             <visualize>true</visualize>
             <topic>${imu_topic}</topic>
         </sensor>
+    </gazebo>
+
+    <gazebo reference="imu_joint">
+        <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
 
     <!-- LIDAR -->
@@ -81,7 +93,8 @@
         <sensor name='gpu_lidar' type='gpu_lidar'>
             <topic>${lidar_topic}</topic>
             <update_rate>${lidar_update_rate}</update_rate>
-            <ignition_frame_id>arv/lidar_link</ignition_frame_id>
+            <alwaysOn>1</alwaysOn>
+            <visualize>true</visualize>
             <lidar>
                 <scan>
                     <horizontal>
@@ -108,11 +121,12 @@
                     <stddev>0.001</stddev>
                 </noise>
             </lidar>
-            <alwaysOn>1</alwaysOn>
-            <visualize>true</visualize>
         </sensor>
     </gazebo>
 
+    <gazebo reference="lidar_joint">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
 
     <!--            Car Parts           -->
     
