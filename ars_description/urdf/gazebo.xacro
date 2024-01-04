@@ -5,53 +5,23 @@
         <hardware>
             <plugin>ign_ros2_control/IgnitionSystem</plugin>
         </hardware>
-        <joint name="LEFT_FRONT_WHEEL_JOINT">
-            <command_interface name="velocity">
-                <param name="min">-1000</param>
-                <param name="max">1000</param>
-            </command_interface>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>
-        <joint name="RIGHT_FRONT_WHEEL_JOINT">
-            <command_interface name="velocity">
-                <param name="min">-1000</param>
-                <param name="max">1000</param>
-            </command_interface>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>
         <joint name="LEFT_HINGE_JOINT">
-            <command_interface name="velocity">
-                <param name="min">-1000</param>
-                <param name="max">1000</param>
-            </command_interface>
+            <command_interface name="position"/>
             <state_interface name="position"/>
-            <state_interface name="velocity"/>
         </joint>
         <joint name="RIGHT_HINGE_JOINT">
-            <command_interface name="velocity">
-                <param name="min">-1000</param>
-                <param name="max">1000</param>
-            </command_interface>
+            <command_interface name="position"/>
             <state_interface name="position"/>
-            <state_interface name="velocity"/>
         </joint>
         <joint name="LEFT_REAR_WHEEL_JOINT">
-            <command_interface name="velocity">
-                <param name="min">-1000</param>
-                <param name="max">1000</param>
-            </command_interface>
-            <state_interface name="position"/>
+            <command_interface name="velocity"/>
             <state_interface name="velocity"/>
+            <state_interface name="position"/>
         </joint>
         <joint name="RIGHT_REAR_WHEEL_JOINT">
-            <command_interface name="velocity">
-                <param name="min">-1000</param>
-                <param name="max">1000</param>
-            </command_interface>
-            <state_interface name="position"/>
+            <command_interface name="velocity"/>
             <state_interface name="velocity"/>
+            <state_interface name="position"/>
         </joint>
     </ros2_control>
 
@@ -131,72 +101,5 @@
     </gazebo>
 
 
-    <!--            Car Parts           -->    
-    <!-- Left front wheel -->
-    <gazebo reference="LEFT_FRONT_WHEEL">
-        <mu1 value="${friction_coeff}"/>
-        <mu2 value="${friction_coeff}"/>
-        <fdir1 value="1 0 0"/>
-        <kp>10000000.0</kp>
-        <kd>1.0</kd>
-        <minDepth>0.005</minDepth>
-        <maxVel>100.0</maxVel>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
 
-    <!-- Right front wheel -->
-    <gazebo reference="RIGHT_FRONT_WHEEL">
-        <mu1 value="${friction_coeff}"/>
-        <mu2 value="${friction_coeff}"/>
-        <fdir1 value="1 0 0"/>
-        <kp>10000000.0</kp>
-        <kd>1.0</kd>
-        <minDepth>0.005</minDepth>
-        <maxVel>100.0</maxVel>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
-
-    <!-- Left rear wheel -->
-    <gazebo reference="LEFT_REAR_WHEEL">
-        <mu1 value="${friction_coeff}"/>
-        <mu2 value="${friction_coeff}"/>
-        <fdir1 value="1 0 0"/>
-        <kp>10000000.0</kp>
-        <kd>1.0</kd>
-        <minDepth>0.005</minDepth>
-        <maxVel>100.0</maxVel>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
-
-    <!-- Right rear wheel -->
-    <gazebo reference="RIGHT_REAR_WHEEL">
-        <mu1 value="${friction_coeff}"/>
-        <mu2 value="${friction_coeff}"/>
-        <fdir1 value="1 0 0"/>
-        <kp>10000000.0</kp>
-        <kd>1.0</kd>
-        <minDepth>0.005</minDepth>
-        <maxVel>100.0</maxVel>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
-
-    <!-- Left hinge -->
-    <gazebo reference="LEFT_WHEEL_HINGE">
-        <mu1 value="0.0"/>
-        <mu2 value="0.0"/>
-        <kp>10000000.0</kp>
-        <kd>1.0</kd>
-        <fdir1 value="0 1 0"/>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
-
-    <!-- Right hinge -->
-    <gazebo reference="RIGHT_WHEEL_HINGE">
-        <mu1 value="0.0"/>
-        <mu2 value="0.0"/>
-        <kp>10000000.0</kp>
-        <kd>1.0</kd>
-        <fdir1 value="0 1 0"/>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
 </robot>

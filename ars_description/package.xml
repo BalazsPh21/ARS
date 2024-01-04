@@ -8,8 +8,6 @@
   <license>TODO</license>
   <author>Balazs Tuba</author>
 
-  <depend>ign_ros2_control</depend>
-
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>

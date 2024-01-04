@@ -72,8 +72,7 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         parameters=[{
-            'config_file': os.path.join(pkg_project_bringup, 'config', 'ros_gz_bridge.yaml'),
-            'qos_overrides./tf_static.publisher.durability': 'transient_local',
+            'config_file': os.path.join(pkg_project_bringup, 'config', 'ros_gz_bridge.yaml')
         }],
         output='screen'
     )

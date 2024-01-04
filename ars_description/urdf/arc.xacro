@@ -10,8 +10,8 @@
     <xacro:include filename="$(find ars_description)/urdf/parts/rear_wheel.xacro"/>
     <xacro:include filename="$(find ars_description)/urdf/sensors/imu.xacro"/>
     <xacro:include filename="$(find ars_description)/urdf/sensors/lidar.xacro"/>
+    <!--<xacro:include filename="$(find ars_description)/urdf/transmissions.xacro"/>-->
     <xacro:include filename="$(find ars_description)/urdf/gazebo.xacro"/>
-    <xacro:include filename="$(find ars_description)/urdf/transmissions.xacro"/>
 
     <xacro:chassis/>
     
