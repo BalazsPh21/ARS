@@ -2,8 +2,10 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:macro name="chassis">
+        
+        <link name="base_link"/>
 
-        <link name="${base_link_name}">
+        <link name="chassis">
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
@@ -19,17 +21,6 @@
                     <color rgba="0.8 0.0 0.1 1.0"/>
                 </material>
             </visual>
-        </link>
-
-        <!-- Fixed joint to add dummy inertia link -->
-        <joint name="base_to_base_inertia" type="fixed">
-            <parent link="${base_link_name}"/>
-            <child link="base_inertia"/>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </joint>
-
-        <!-- Dummy inertia link, because KDL cannot have inertia on the base link -->
-        <link name="base_inertia">
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <mass value="${chassisMass}"/>
@@ -41,6 +32,13 @@
                 />
             </inertial>
         </link>
+
+        <!-- Fixed joint to add dummy inertia link -->
+        <joint name="chassis_joinz" type="fixed">
+            <parent link="base_link"/>
+            <child link="chassis"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
 
     </xacro:macro>
 
