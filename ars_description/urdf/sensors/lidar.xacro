@@ -30,5 +30,45 @@
             </collision>
         </link>
 
+        <gazebo reference="lidar_link">
+            <sensor name='gpu_lidar' type='gpu_lidar'>
+                <topic>${lidar_topic}</topic>
+                <update_rate>${lidar_update_rate}</update_rate>
+                <alwaysOn>1</alwaysOn>
+                <visualize>true</visualize>
+                <ignition_frame_id>lidar_link</ignition_frame_id>
+                <lidar>
+                    <scan>
+                        <horizontal>
+                            <samples>640</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-1.396263</min_angle>
+                            <max_angle>1.396263</max_angle>
+                        </horizontal>
+                        <vertical>
+                        <samples>1</samples>
+                        <resolution>1</resolution>
+                        <min_angle>0.0</min_angle>
+                        <max_angle>0.0</max_angle>
+                        </vertical>
+                    </scan>
+                    <range>
+                        <min>0.08</min>
+                        <max>10</max>
+                        <resolution>0.01</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.001</stddev>
+                    </noise>
+                </lidar>
+            </sensor>
+        </gazebo>
+
+        <gazebo reference="lidar_joint">
+            <preserveFixedJoint>true</preserveFixedJoint>
+        </gazebo>
+
     </xacro:macro>
 </robot>

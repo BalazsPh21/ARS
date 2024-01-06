@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 1000
+    update_rate: 50
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -22,6 +22,10 @@ ackermann_steering_controller:
     use_stamped_vel: false
     rear_wheels_names: [RIGHT_REAR_WHEEL_JOINT, LEFT_REAR_WHEEL_JOINT]
     front_wheels_names: [RIGHT_HINGE_JOINT, LEFT_HINGE_JOINT]
+    odom_frame_id: odom
+    base_frame_id: base_link
+    enable_odom_tf: true
+    odom_only_twist: false
     
     wheelbase: 0.324
     front_wheel_track: 0.387

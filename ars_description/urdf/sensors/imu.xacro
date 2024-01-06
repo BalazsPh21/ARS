@@ -30,5 +30,19 @@
             </collision>
         </link>
 
+        <gazebo reference="imu_link">
+            <sensor name="imu_sensor" type="imu">
+                <always_on>1</always_on>
+                <update_rate>${imu_update_rate}</update_rate>
+                <ignition_frame_id>imu_link</ignition_frame_id>
+                <visualize>true</visualize>
+                <topic>${imu_topic}</topic>
+            </sensor>
+        </gazebo>
+
+        <gazebo reference="imu_joint">
+            <preserveFixedJoint>true</preserveFixedJoint>
+        </gazebo>
+
     </xacro:macro> 
 </robot> 

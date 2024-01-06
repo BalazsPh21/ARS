@@ -28,22 +28,62 @@
   <material name="white">
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
+  <ros2_control name="IgnitionSystem" type="system">
+    <hardware>
+      <plugin>ign_ros2_control/IgnitionSystem</plugin>
+    </hardware>
+    <joint name="LEFT_HINGE_JOINT">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+    </joint>
+    <joint name="RIGHT_HINGE_JOINT">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+    </joint>
+    <joint name="LEFT_REAR_WHEEL_JOINT">
+      <command_interface name="velocity"/>
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+    <joint name="RIGHT_REAR_WHEEL_JOINT">
+      <command_interface name="velocity"/>
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+  </ros2_control>
+  <gazebo>
+    <!-- Joint state publisher -->
+    <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <parameters>/home/balazs/ars_ws/install/ars_description/share/ars_description/config/ars_description.yaml</parameters>
+    </plugin>
+    <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
+        </plugin>
+    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+  </gazebo>
+  <!--        Sensors        -->
   <!-- IMU -->
   <gazebo reference="imu_link">
     <sensor name="imu_sensor" type="imu">
       <always_on>1</always_on>
       <update_rate>400</update_rate>
-      <ignition_frame_id>arv/imu_link</ignition_frame_id>
+      <ignition_frame_id>imu_link</ignition_frame_id>
       <visualize>true</visualize>
       <topic>/imu</topic>
     </sensor>
+  </gazebo>
+  <gazebo reference="imu_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
   </gazebo>
   <!-- LIDAR -->
   <gazebo reference="lidar_link">
     <sensor name="gpu_lidar" type="gpu_lidar">
       <topic>/scan</topic>
       <update_rate>400</update_rate>
-      <ignition_frame_id>arv/lidar_link</ignition_frame_id>
+      <alwaysOn>1</alwaysOn>
+      <visualize>true</visualize>
+      <ignition_frame_id>lidar_link</ignition_frame_id>
       <lidar>
         <scan>
           <horizontal>
@@ -70,72 +110,10 @@
           <stddev>0.001</stddev>
         </noise>
       </lidar>
-      <alwaysOn>1</alwaysOn>
-      <visualize>true</visualize>
     </sensor>
   </gazebo>
-  <!--            Wheels        -->
-  <!-- Left front wheel -->
-  <gazebo reference="LEFT_FRONT_WHEEL">
-    <mu1 value="0.8"/>
-    <mu2 value="0.8"/>
-    <fdir1 value="1 0 0"/>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
-    <minDepth>0.005</minDepth>
-    <maxVel>100.0</maxVel>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <!-- Right front wheel -->
-  <gazebo reference="RIGHT_FRONT_WHEEL">
-    <mu1 value="0.8"/>
-    <mu2 value="0.8"/>
-    <fdir1 value="1 0 0"/>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
-    <minDepth>0.005</minDepth>
-    <maxVel>100.0</maxVel>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <!-- Left rear wheel -->
-  <gazebo reference="LEFT_REAR_WHEEL">
-    <mu1 value="0.8"/>
-    <mu2 value="0.8"/>
-    <fdir1 value="1 0 0"/>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
-    <minDepth>0.005</minDepth>
-    <maxVel>100.0</maxVel>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <!-- Right rear wheel -->
-  <gazebo reference="RIGHT_REAR_WHEEL">
-    <mu1 value="0.8"/>
-    <mu2 value="0.8"/>
-    <fdir1 value="1 0 0"/>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
-    <minDepth>0.005</minDepth>
-    <maxVel>100.0</maxVel>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <!-- Left hinge -->
-  <gazebo reference="LEFT_WHEEL_HINGE">
-    <mu1 value="0.0"/>
-    <mu2 value="0.0"/>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
-    <fdir1 value="0 1 0"/>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <!-- Right hinge -->
-  <gazebo reference="RIGHT_WHEEL_HINGE">
-    <mu1 value="0.0"/>
-    <mu2 value="0.0"/>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
-    <fdir1 value="0 1 0"/>
-    <material>Gazebo/DarkGrey</material>
+  <gazebo reference="lidar_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
   </gazebo>
   <link name="base_link">
     <collision>
@@ -174,7 +152,7 @@
     <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 0.15999999999999998 -0.0295"/>
     <axis rpy="0 0 0" xyz="0 -1 0"/>
     <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100" lower="-0.53" upper="0.53" velocity="1"/>
+    <limit effort="100.0" lower="-0.53" upper="0.53" velocity="5.0"/>
   </joint>
   <link name="LEFT_HINGE">
     <visual>
@@ -195,7 +173,7 @@
     <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 -0.15999999999999998 -0.0295"/>
     <axis rpy="0 0 0" xyz="0 -1 0"/>
     <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100" lower="-0.53" upper="0.53" velocity="1"/>
+    <limit effort="100.0" lower="-0.53" upper="0.53" velocity="5.0"/>
   </joint>
   <link name="RIGHT_HINGE">
     <visual>

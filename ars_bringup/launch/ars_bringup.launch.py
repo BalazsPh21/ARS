@@ -3,7 +3,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, RegisterEventHandler
 from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
@@ -14,6 +14,9 @@ import xacro
 
 
 def generate_launch_description():
+    # Launch Arguments
+    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
+
     pkg_ars_bringup = get_package_share_directory('ars_bringup')
     pkg_ars_description = get_package_share_directory('ars_description')
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
@@ -23,7 +26,7 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(xacro_file)
     
     # Create a robot_state_publisher node
-    params = {'robot_description': robot_description_config.toxml(),  'use_sim_time': True}
+    params = {'robot_description': robot_description_config.toxml(),  'use_sim_time': use_sim_time}
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -51,17 +54,17 @@ def generate_launch_description():
     )
 
     # Spawn ros2_controller ackermann_steering_controller
-    ackermann_steering_controller = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["ackermann_steering_controller"],
+    ackermann_steering_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'ackermann_steering_controller'],
+        output='screen'
     )
 
     # Spawn ros2_controller joint_state_broadcaster
-    joint_state_broadcaster = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
+    joint_state_broadcaster = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_state_broadcaster'],
+        output='screen'
     )
 
     # Launch ROS Gazebo Bridge
@@ -78,8 +81,7 @@ def generate_launch_description():
     rviz = Node(
        package='rviz2',
        executable='rviz2',
-       arguments=['-d', os.path.join(pkg_ars_bringup, 'config', 'ars.rviz')],
-       condition=IfCondition(LaunchConfiguration('rviz'))
+       arguments=['-d', os.path.join(pkg_ars_bringup, 'config', 'ars.rviz')]
     )
 
     # Launch!
@@ -100,7 +102,9 @@ def generate_launch_description():
         ),
         robot_state_publisher,
         spawn_entity,
-        DeclareLaunchArgument('rviz', default_value='true',
-                              description='Open RViz.'),
-        rviz
+        # Launch Arguments
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value=use_sim_time,
+            description='If true, use simulated clock'),
     ])

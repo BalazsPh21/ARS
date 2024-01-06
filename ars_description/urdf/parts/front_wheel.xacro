@@ -8,9 +8,7 @@
             <child link="${prefix}_FRONT_WHEEL"/>
             <origin xyz="0 0 ${Y}" rpy="0 0 0" />
             <axis xyz="0 0 1" rpy="0 0 0" />
-            <dynamics damping="0.0" friction="0.0"/>
-            <limit effort="100" velocity="200"/>
-            <joint_properties damping="0.2" friction="0.2"/>
+            <dynamics damping="0.2"/>
         </joint>
 
         <link name="${prefix}_FRONT_WHEEL">
