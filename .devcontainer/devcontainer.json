@@ -1,14 +1,25 @@
 {
-  "name": "humble desktop",
+  "name": "Autonomous Racing Simulation",
   "dockerFile": "Dockerfile",
   "runArgs": [
-    "--privileged",
-    "--network=host"
+    "--privileged"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/ars_ws/src,type=bind",
   "workspaceFolder": "/home/ars_ws",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/vscode/.bash_history,type=bind"
   ],
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {}
+  },
+  "forwardPorts": [6080, 5901],
+  "portsAttributes": {
+    "6080": {
+      "label": "Desktop (Web)"
+    },
+    "5901": {
+      "label": "Desktop (VNC)"
+    }
+  },
   "postCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -y && sudo chown -R vscode /home/ars_ws/"
 }

@@ -7,18 +7,10 @@
   <maintainer email="balazsph@outlook.hu">Balazs Tuba</maintainer>
   <license>TODO</license>
   <author>Balazs Tuba</author>
+  
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
   <depend>ars_description</depend>
-
-  <exec_depend>ign_ros2_control</exec_depend>
-  <exec_depend>ros_ign_gazebo</exec_depend>
-  <exec_depend>ros_gz_bridge</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>joint_state_broadcaster</exec_depend>
-  <exec_depend>ackermann_steering_controller</exec_depend>
-  <exec_depend>xacro</exec_depend>
-
-  <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>
 

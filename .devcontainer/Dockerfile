@@ -21,10 +21,19 @@ RUN sudo usermod --append --groups video $USERNAME
 RUN sudo apt update && sudo apt upgrade -y
 
 # Install Git
-RUN sudo apt install -y git
+RUN sudo apt install -y \
+    git \
+    curl
 
 # Rosdep update
 RUN rosdep update
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+
+RUN sudo apt-get install -y \
+    ros-humble-xacro \
+    ros-humble-ros2-control \
+    ros-humble-ros2-controllers \
+    ros-humble-ros-gz \
+    ros-humble-ign-ros2-control
