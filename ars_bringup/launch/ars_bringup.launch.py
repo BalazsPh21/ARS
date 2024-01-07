@@ -16,6 +16,7 @@ def generate_launch_description():
     # Launch Arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default=True)
 
+    # Package directories
     pkg_ars_bringup = get_package_share_directory('ars_bringup')
     pkg_ars_description = get_package_share_directory('ars_description')
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')

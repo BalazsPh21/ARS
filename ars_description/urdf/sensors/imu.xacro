@@ -40,9 +40,9 @@
             </sensor>
         </gazebo>
 
-        <gazebo reference="imu_joint">
+        <!-- <gazebo reference="imu_joint">
             <preserveFixedJoint>true</preserveFixedJoint>
-        </gazebo>
+        </gazebo> -->
 
     </xacro:macro> 
 </robot> 

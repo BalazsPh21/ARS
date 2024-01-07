@@ -33,11 +33,11 @@
     
     <xacro:rear_wheel prefix="LEFT"
         X="${backWheelX}"
-        Y="${chassisWidth/2+wheelClearance+wheelWidth/2}"/>
+        Y="${chassisWidth/2+hingeLength+wheelWidth/2}"/>
 
     <xacro:rear_wheel prefix="RIGHT" 
         X="${backWheelX}"
-        Y="${-chassisWidth/2-wheelClearance-wheelWidth/2}"/>
+        Y="${-chassisWidth/2-hingeLength-wheelWidth/2}"/>
     
     <xacro:IMU base_link="${base_link_name}"/>
     

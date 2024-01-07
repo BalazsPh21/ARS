@@ -66,9 +66,9 @@
             </sensor>
         </gazebo>
 
-        <gazebo reference="lidar_joint">
+        <!-- <gazebo reference="lidar_joint">
             <preserveFixedJoint>true</preserveFixedJoint>
-        </gazebo>
+        </gazebo> -->
 
     </xacro:macro>
 </robot>
