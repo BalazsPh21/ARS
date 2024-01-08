@@ -15,7 +15,7 @@ joint_state_broadcaster:
 ackermann_steering_controller:
   ros__parameters:
 
-    reference_timeout: 2.0
+    reference_timeout: 0.1
     front_steering: true
     open_loop: false
     velocity_rolling_window_size: 10
