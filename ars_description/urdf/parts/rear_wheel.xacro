@@ -13,7 +13,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <cylinder length="${wheelWidth}" radius="${wheelRadius}"/>
+                    <sphere radius="${wheelRadius}"/>
                 </geometry>
             </collision>
             <visual>
