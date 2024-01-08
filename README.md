@@ -10,7 +10,7 @@ This repository is planned to extend the functionality of a [single Ackermann-st
 
 **System Requirements**
 - Ubuntu (tested on 22.04) native with ROS 2 Humble
-- Ubuntu (tested on 22.04) with Dev Containers installed
+- Ubuntu (tested on 22.04) with Docker and Dev Containers installed
 
 ## Option 1 - Native on Ubuntu 22.04
 - Create a workspace:
