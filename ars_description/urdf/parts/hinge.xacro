@@ -3,7 +3,7 @@
 
     <xacro:macro name="hinge" params="prefix X Y">
         <joint name="${prefix}_HINGE_JOINT" type="continuous">
-            <parent link="${base_link_name}"/>
+            <parent link="chassis"/>
             <child link="${prefix}_HINGE"/>
             <origin xyz="${X} ${Y} ${wheelHeight - chassisHeight/2.0}" rpy="-${0.5*PI} 0.0 0.0"/>
             <axis xyz="0 -1 0" rpy="0 0 0"/>

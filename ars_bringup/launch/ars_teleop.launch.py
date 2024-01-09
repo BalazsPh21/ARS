@@ -78,6 +78,22 @@ def generate_launch_description():
         output='screen'
     )
 
+    teleop_twist_keyboard = Node(
+        package='teleop_twist_keyboard',
+        executable='teleop_twist_keyboard',
+        prefix='xterm -e',
+        output='screen'
+    )
+
+    twist_stamper = Node(
+        package='twist_stamper',
+        executable='twist_stamper',
+        remappings=[
+            ('/cmd_vel_in', '/cmd_vel'),
+            ('/cmd_vel_out', '/ackermann_steering_controller/reference')
+        ]
+    )
+
     # Launch RViz
     rviz = Node(
        package='rviz2',
@@ -85,33 +101,10 @@ def generate_launch_description():
        arguments=['-d', os.path.join(pkg_ars_bringup, 'config', 'ars.rviz')]
     )
 
-    # Nodes launching commands
-    map_server_node = Node(
-        package='nav2_map_server',
-        executable='map_server',
-        output='screen',
-        parameters=[
-            os.path.join(pkg_ars_bringup, 'config', 'map_server_params.yaml')
-        ]
-    )
-
-    nav2_lifecycle_manager = Node(
-        package='nav2_lifecycle_manager',
-        executable='lifecycle_manager',
-        output='screen',
-        parameters=[
-            {'use_sim_time': True},
-            {'autostart': True},
-            {'node_names': ['map_server']}
-        ]
-    )
-
     # Launch!
     return LaunchDescription([
         bridge,
         gazebo,
-        nav2_lifecycle_manager,
-        map_server_node,
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,
@@ -127,6 +120,8 @@ def generate_launch_description():
         robot_state_publisher,
         spawn_entity,
         rviz,
+        twist_stamper,
+        teleop_twist_keyboard,
         # Launch Arguments
         DeclareLaunchArgument(
             'use_sim_time',

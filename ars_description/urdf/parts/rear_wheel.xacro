@@ -3,7 +3,7 @@
 
     <xacro:macro name="rear_wheel" params="prefix X Y friction_coeff:=0.7 transmission_reduction:=1" >
         <joint name="${prefix}_REAR_WHEEL_JOINT" type="continuous">
-            <parent link="${base_link_name}"/>
+            <parent link="chassis"/>
             <child link="${prefix}_REAR_WHEEL"/>
             <origin xyz="${X} ${Y} ${wheelHeight - chassisHeight/2.0}" rpy="${PI/2} 0 0" />
             <axis xyz="0 0 -1" rpy="0 0 0" />

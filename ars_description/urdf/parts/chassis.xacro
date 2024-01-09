@@ -37,7 +37,7 @@
         <joint name="chassis_joinz" type="fixed">
             <parent link="base_link"/>
             <child link="chassis"/>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 ${wheelRadius - wheelHeight + chassisHeight/2.0}" rpy="0 0 0"/>
         </joint>
 
     </xacro:macro>

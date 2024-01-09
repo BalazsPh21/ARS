@@ -1,3 +1,3 @@
 map_server:
   ros__parameters:
-    yaml_filename: "ars_ws/src/ars_bringup/maps/Spielberg_map.yaml"
+    yaml_filename: "/home/balazs/ars_ws/src/ars_bringup/maps/Spielberg_map.yaml"

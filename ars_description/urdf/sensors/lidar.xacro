@@ -5,7 +5,7 @@
         <!-- LIDAR is fixed to base link -->
         <joint name="lidar_joint" type="fixed">
             <origin xyz="${lidar_origin_xyz}" rpy="${lidar_origin_rpy}"/>
-            <parent link="${base_link}"/>
+            <parent link="chassis"/>
             <child link="lidar_link"/>
         </joint>
 

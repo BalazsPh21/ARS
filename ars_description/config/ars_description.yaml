@@ -23,7 +23,7 @@ ackermann_steering_controller:
     use_stamped_vel: true
     rear_wheels_names: [RIGHT_REAR_WHEEL_JOINT, LEFT_REAR_WHEEL_JOINT]
     front_wheels_names: [RIGHT_HINGE_JOINT, LEFT_HINGE_JOINT]
-    
+
     wheelbase: 0.324
     front_wheel_track: 0.387
     rear_wheel_track: 0.387
