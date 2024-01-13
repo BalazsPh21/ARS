@@ -52,9 +52,14 @@
     </joint>
   </ros2_control>
   <gazebo>
-    <!-- Joint state publisher -->
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
       <parameters>/home/balazs/ars_ws/install/ars_description/share/ars_description/config/ars_description.yaml</parameters>
+      <ros>
+        <namespace/>
+        <remapping>ackermann_steering_controller/reference_:=cmd_vel_stamped</remapping>
+        <remapping>ackermann_steering_controller/odometry:=odom</remapping>
+        <remapping>ackermann_steering_controller/tf_odometry:=tf</remapping>
+      </ros>
     </plugin>
     <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
         </plugin>
@@ -62,8 +67,201 @@
       <render_engine>ogre2</render_engine>
     </plugin>
   </gazebo>
-  <!--        Sensors        -->
-  <!-- IMU -->
+  <link name="base_link"/>
+  <link name="chassis">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.57 0.29 0.075"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.57 0.29 0.075"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.8 0.0 0.1 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="2.3"/>
+      <inertia ixx="0.017197291666666666" ixy="0" ixz="0" iyy="0.06335062499999998" iyz="0" izz="0.06335062499999998"/>
+    </inertial>
+  </link>
+  <!-- Fixed joint to add dummy inertia link -->
+  <joint name="chassis_joinz" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+    <origin rpy="0 0 0" xyz="0 0 0.08449999999999999"/>
+  </joint>
+  <joint name="LEFT_HINGE_JOINT" type="continuous">
+    <parent link="chassis"/>
+    <child link="LEFT_HINGE"/>
+    <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 0.15999999999999998 -0.0295"/>
+    <axis rpy="0 0 0" xyz="0 -1 0"/>
+  </joint>
+  <link name="LEFT_HINGE">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder length="0.03" radius="0.01"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <mass value="0.03"/>
+      <inertia ixx="2.9999999999999997e-06" ixy="0" ixz="0" iyy="2.9999999999999997e-06" iyz="0" izz="1.4999999999999998e-06"/>
+    </inertial>
+  </link>
+  <joint name="RIGHT_HINGE_JOINT" type="continuous">
+    <parent link="chassis"/>
+    <child link="RIGHT_HINGE"/>
+    <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 -0.15999999999999998 -0.0295"/>
+    <axis rpy="0 0 0" xyz="0 -1 0"/>
+  </joint>
+  <link name="RIGHT_HINGE">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder length="0.03" radius="0.01"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <mass value="0.03"/>
+      <inertia ixx="2.9999999999999997e-06" ixy="0" ixz="0" iyy="2.9999999999999997e-06" iyz="0" izz="1.4999999999999998e-06"/>
+    </inertial>
+  </link>
+  <joint name="LEFT_FRONT_WHEEL_JOINT" type="continuous">
+    <parent link="LEFT_HINGE"/>
+    <child link="LEFT_FRONT_WHEEL"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0335"/>
+    <axis rpy="0 0 0" xyz="0 0 1"/>
+    <dynamics damping="0.2"/>
+  </joint>
+  <link name="LEFT_FRONT_WHEEL">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.055"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.037" radius="0.055"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.08"/>
+      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
+    </inertial>
+  </link>
+  <joint name="RIGHT_FRONT_WHEEL_JOINT" type="continuous">
+    <parent link="RIGHT_HINGE"/>
+    <child link="RIGHT_FRONT_WHEEL"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.0335"/>
+    <axis rpy="0 0 0" xyz="0 0 1"/>
+    <dynamics damping="0.2"/>
+  </joint>
+  <link name="RIGHT_FRONT_WHEEL">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.055"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.037" radius="0.055"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.08"/>
+      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
+    </inertial>
+  </link>
+  <joint name="LEFT_REAR_WHEEL_JOINT" type="continuous">
+    <parent link="chassis"/>
+    <child link="LEFT_REAR_WHEEL"/>
+    <origin rpy="1.5707963267948966 0 0" xyz="-0.162 0.19349999999999998 -0.0295"/>
+    <axis rpy="0 0 0" xyz="0 0 -1"/>
+  </joint>
+  <link name="LEFT_REAR_WHEEL">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.055"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.037" radius="0.055"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.08"/>
+      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
+    </inertial>
+  </link>
+  <joint name="RIGHT_REAR_WHEEL_JOINT" type="continuous">
+    <parent link="chassis"/>
+    <child link="RIGHT_REAR_WHEEL"/>
+    <origin rpy="1.5707963267948966 0 0" xyz="-0.162 -0.19349999999999998 -0.0295"/>
+    <axis rpy="0 0 0" xyz="0 0 -1"/>
+  </joint>
+  <link name="RIGHT_REAR_WHEEL">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.055"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.037" radius="0.055"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.08"/>
+      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
+    </inertial>
+  </link>
+  <!-- Imu is fixed to the base link -->
+  <joint name="imu_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.162 0 0.042499999999999996"/>
+    <parent link="chassis"/>
+    <child link="imu_link"/>
+  </joint>
+  <!-- Imu link -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="2.666666666666667e-05" ixy="0" ixz="0" iyy="2.666666666666667e-05" iyz="0" izz="2.666666666666667e-05"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.05 0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.05 0.02"/>
+      </geometry>
+    </collision>
+  </link>
   <gazebo reference="imu_link">
     <sensor name="imu_sensor" type="imu">
       <always_on>1</always_on>
@@ -73,10 +271,35 @@
       <topic>/imu</topic>
     </sensor>
   </gazebo>
-  <gazebo reference="imu_joint">
-    <preserveFixedJoint>true</preserveFixedJoint>
-  </gazebo>
-  <!-- LIDAR -->
+  <!-- <gazebo reference="imu_joint">
+            <preserveFixedJoint>true</preserveFixedJoint>
+        </gazebo> -->
+  <!-- LIDAR is fixed to base link -->
+  <joint name="lidar_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.162 0 0.0875"/>
+    <parent link="chassis"/>
+    <child link="lidar_link"/>
+  </joint>
+  <!-- LIDAR link -->
+  <link name="lidar_link">
+    <inertial>
+      <mass value="0.15"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.000164107125" ixy="0" ixz="0" iyy="0.000164107125" iyz="0" izz="0.00019969199999999998"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0717" radius="0.0516"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0717" radius="0.0516"/>
+      </geometry>
+    </collision>
+  </link>
   <gazebo reference="lidar_link">
     <sensor name="gpu_lidar" type="gpu_lidar">
       <topic>/scan</topic>
@@ -112,244 +335,7 @@
       </lidar>
     </sensor>
   </gazebo>
-  <gazebo reference="lidar_joint">
-    <preserveFixedJoint>true</preserveFixedJoint>
-  </gazebo>
-  <link name="base_link">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.57 0.29 0.075"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.57 0.29 0.075"/>
-      </geometry>
-      <material name="base_material">
-        <color rgba="0.8 0.0 0.1 1.0"/>
-      </material>
-    </visual>
-  </link>
-  <!-- Fixed joint to add dummy inertia link -->
-  <joint name="base_to_base_inertia" type="fixed">
-    <parent link="base_link"/>
-    <child link="base_inertia"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-  </joint>
-  <!-- Dummy inertia link, because KDL cannot have inertia on the base link -->
-  <link name="base_inertia">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="2.3"/>
-      <inertia ixx="0.017197291666666666" ixy="0" ixz="0" iyy="0.06335062499999998" iyz="0" izz="0.06335062499999998"/>
-    </inertial>
-  </link>
-  <joint name="LEFT_HINGE_JOINT" type="revolute">
-    <parent link="base_link"/>
-    <child link="LEFT_HINGE"/>
-    <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 0.15999999999999998 -0.0295"/>
-    <axis rpy="0 0 0" xyz="0 -1 0"/>
-    <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100.0" lower="-0.53" upper="0.53" velocity="5.0"/>
-  </joint>
-  <link name="LEFT_HINGE">
-    <visual>
-      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-      <geometry>
-        <cylinder length="0.03" radius="0.01"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.03"/>
-      <inertia ixx="2.9999999999999997e-06" ixy="0" ixz="0" iyy="2.9999999999999997e-06" iyz="0" izz="1.4999999999999998e-06"/>
-    </inertial>
-  </link>
-  <joint name="RIGHT_HINGE_JOINT" type="revolute">
-    <parent link="base_link"/>
-    <child link="RIGHT_HINGE"/>
-    <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 -0.15999999999999998 -0.0295"/>
-    <axis rpy="0 0 0" xyz="0 -1 0"/>
-    <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100.0" lower="-0.53" upper="0.53" velocity="5.0"/>
-  </joint>
-  <link name="RIGHT_HINGE">
-    <visual>
-      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-      <geometry>
-        <cylinder length="0.03" radius="0.01"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.03"/>
-      <inertia ixx="2.9999999999999997e-06" ixy="0" ixz="0" iyy="2.9999999999999997e-06" iyz="0" izz="1.4999999999999998e-06"/>
-    </inertial>
-  </link>
-  <joint name="LEFT_FRONT_WHEEL_JOINT" type="continuous">
-    <parent link="LEFT_HINGE"/>
-    <child link="LEFT_FRONT_WHEEL"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0335"/>
-    <axis rpy="0 0 0" xyz="0 0 1"/>
-    <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100" velocity="200"/>
-    <joint_properties damping="0.2" friction="0.2"/>
-  </joint>
-  <link name="LEFT_FRONT_WHEEL">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.08"/>
-      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
-    </inertial>
-  </link>
-  <joint name="RIGHT_FRONT_WHEEL_JOINT" type="continuous">
-    <parent link="RIGHT_HINGE"/>
-    <child link="RIGHT_FRONT_WHEEL"/>
-    <origin rpy="0 0 0" xyz="0 0 -0.0335"/>
-    <axis rpy="0 0 0" xyz="0 0 1"/>
-    <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100" velocity="200"/>
-    <joint_properties damping="0.2" friction="0.2"/>
-  </joint>
-  <link name="RIGHT_FRONT_WHEEL">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.08"/>
-      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
-    </inertial>
-  </link>
-  <joint name="LEFT_REAR_WHEEL_JOINT" type="continuous">
-    <parent link="base_link"/>
-    <child link="LEFT_REAR_WHEEL"/>
-    <origin rpy="1.5707963267948966 0 0" xyz="-0.162 0.1735 -0.0295"/>
-    <axis rpy="0 0 0" xyz="0 0 -1"/>
-    <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100" velocity="200"/>
-    <joint_properties damping="0.2" friction="0.2"/>
-  </joint>
-  <link name="LEFT_REAR_WHEEL">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.08"/>
-      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
-    </inertial>
-  </link>
-  <joint name="RIGHT_REAR_WHEEL_JOINT" type="continuous">
-    <parent link="base_link"/>
-    <child link="RIGHT_REAR_WHEEL"/>
-    <origin rpy="1.5707963267948966 0 0" xyz="-0.162 -0.1735 -0.0295"/>
-    <axis rpy="0 0 0" xyz="0 0 -1"/>
-    <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="100" velocity="200"/>
-    <joint_properties damping="0.2" friction="0.2"/>
-  </joint>
-  <link name="RIGHT_REAR_WHEEL">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.037" radius="0.055"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.08"/>
-      <inertia ixx="6.962666666666667e-05" ixy="0" ixz="0" iyy="6.962666666666667e-05" iyz="0" izz="0.00012100000000000001"/>
-    </inertial>
-  </link>
-  <!-- Imu is fixed to the base link -->
-  <joint name="imu_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.162 0 0.042499999999999996"/>
-    <parent link="base_link"/>
-    <child link="imu_link"/>
-  </joint>
-  <!-- Imu link -->
-  <link name="imu_link">
-    <inertial>
-      <mass value="0.1"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="2.666666666666667e-05" ixy="0" ixz="0" iyy="2.666666666666667e-05" iyz="0" izz="2.666666666666667e-05"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.04 0.05 0.02"/>
-      </geometry>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.04 0.05 0.02"/>
-      </geometry>
-    </collision>
-  </link>
-  <!-- LIDAR is fixed to base link -->
-  <joint name="lidar_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.162 0 0.0875"/>
-    <parent link="base_link"/>
-    <child link="lidar_link"/>
-  </joint>
-  <!-- LIDAR link -->
-  <link name="lidar_link">
-    <inertial>
-      <mass value="0.15"/>
-      <origin xyz="0 0 0"/>
-      <inertia ixx="0.000164107125" ixy="0" ixz="0" iyy="0.000164107125" iyz="0" izz="0.00019969199999999998"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.0717" radius="0.0516"/>
-      </geometry>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.0717" radius="0.0516"/>
-      </geometry>
-    </collision>
-  </link>
+  <!-- <gazebo reference="lidar_joint">
+            <preserveFixedJoint>true</preserveFixedJoint>
+        </gazebo> -->
 </robot>

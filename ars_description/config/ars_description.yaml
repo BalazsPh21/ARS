@@ -1,6 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 50
+    use_sim_time: true
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -29,3 +30,9 @@ ackermann_steering_controller:
     rear_wheel_track: 0.387
     front_wheels_radius: 0.055
     rear_wheels_radius: 0.055
+
+    steering:
+      min_position: -0.5236
+      max_position: 0.5236
+
+      max_velocity: 1.0
