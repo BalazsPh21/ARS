@@ -30,7 +30,7 @@
             <parameters>$(find ars_description)/config/ars_description.yaml</parameters>
             <ros> 
                 <namespace></namespace>
-                <remapping>ackermann_steering_controller/reference_:=cmd_vel_stamped</remapping>
+                <remapping>ackermann_steering_controller/reference_:=cmd_vel</remapping>
                 <remapping>ackermann_steering_controller/odometry:=odom</remapping>
                 <remapping>ackermann_steering_controller/tf_odometry:=tf</remapping> 
             </ros> 

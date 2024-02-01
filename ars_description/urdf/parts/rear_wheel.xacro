@@ -7,6 +7,7 @@
             <child link="${prefix}_REAR_WHEEL"/>
             <origin xyz="${X} ${Y} ${wheelHeight - chassisHeight/2.0}" rpy="${PI/2} 0 0" />
             <axis xyz="0 0 -1" rpy="0 0 0" />
+            <dynamics damping="0.2" />
         </joint>
 
         <link name="${prefix}_REAR_WHEEL">

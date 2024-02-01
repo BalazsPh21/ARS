@@ -6,7 +6,7 @@
             <parent link="chassis"/>
             <child link="${prefix}_HINGE"/>
             <origin xyz="${X} ${Y} ${wheelHeight - chassisHeight/2.0}" rpy="-${0.5*PI} 0.0 0.0"/>
-            <axis xyz="0 -1 0" rpy="0 0 0"/>
+            <axis xyz="0 1 0" rpy="0 0 0"/>
         </joint>
 
         <link name="${prefix}_HINGE">
