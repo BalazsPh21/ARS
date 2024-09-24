@@ -39,7 +39,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
         ),
-        launch_arguments=[('gz_args', [' -r -v 4 empty.sdf'])]
+        launch_arguments=[('gz_args', [' -r -v --render-engine ogre 4 empty.sdf'])]
     )
 
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
@@ -110,8 +110,8 @@ def generate_launch_description():
     return LaunchDescription([
         bridge,
         gazebo,
-        nav2_lifecycle_manager,
-        map_server_node,
+        # nav2_lifecycle_manager,
+        # map_server_node,
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,

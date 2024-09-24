@@ -34,7 +34,7 @@
     <xacro:property name="lidar_height"		value="0.0717"/>
     <xacro:property name="lidar_radius"		value="0.0516"/>
     <xacro:property name="lidar_mass"		value="0.15"/>
-    <xacro:property name="lidar_update_rate"		value="400"/>
+    <xacro:property name="lidar_update_rate"		value="20"/>
     <xacro:property name="lidar_topic" 			value="/scan"/>
 
     <!-- IMU properties -->

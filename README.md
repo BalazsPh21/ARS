@@ -13,6 +13,12 @@ This repository is planned to extend the functionality of a [single Ackermann-st
 - Ubuntu (tested on 22.04) with Docker and Dev Containers installed
 
 ## Option 1 - Native on Ubuntu 22.04
+- 
+     ```bash
+    sudo apt install ros-humble-ros-ign-bridge
+    sudo apt install ros-humble-ign-ros2-control
+    sudo apt install ros-humble-ackermann-steering-controller
+    ```
 - Create a workspace:
     ```bash
     cd $HOME && mkdir -p ars_ws/src
@@ -61,4 +67,6 @@ cd $HOME/ars_ws
 source /opt/ros/foxy/setup.bash
 source install/setup.sh
 ros2 launch ars_bringup ars_bringup.launch.py
+ros2 run twist_stamper twist_stamper --ros-args -r cmd_vel_in:=cmd_vel -r cmd_vel_out:=/ackermann_steering_controller/reference
+ros2 run teleop_twist_keyboard keyboard_teleop_twist_keyboard
 ```

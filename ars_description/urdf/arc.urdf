@@ -53,10 +53,10 @@
   </ros2_control>
   <gazebo>
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-      <parameters>/home/balazs/ars_ws/install/ars_description/share/ars_description/config/ars_description.yaml</parameters>
+      <parameters>/home/balazs/pma_ws/install/ars_description/share/ars_description/config/ars_description.yaml</parameters>
       <ros>
         <namespace/>
-        <remapping>ackermann_steering_controller/reference_:=cmd_vel_stamped</remapping>
+        <remapping>ackermann_steering_controller/reference_:=cmd_vel</remapping>
         <remapping>ackermann_steering_controller/odometry:=odom</remapping>
         <remapping>ackermann_steering_controller/tf_odometry:=tf</remapping>
       </ros>
@@ -100,7 +100,7 @@
     <parent link="chassis"/>
     <child link="LEFT_HINGE"/>
     <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 0.15999999999999998 -0.0295"/>
-    <axis rpy="0 0 0" xyz="0 -1 0"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
   </joint>
   <link name="LEFT_HINGE">
     <visual>
@@ -119,7 +119,7 @@
     <parent link="chassis"/>
     <child link="RIGHT_HINGE"/>
     <origin rpy="-1.5707963267948966 0.0 0.0" xyz="0.162 -0.15999999999999998 -0.0295"/>
-    <axis rpy="0 0 0" xyz="0 -1 0"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
   </joint>
   <link name="RIGHT_HINGE">
     <visual>
@@ -191,6 +191,7 @@
     <child link="LEFT_REAR_WHEEL"/>
     <origin rpy="1.5707963267948966 0 0" xyz="-0.162 0.19349999999999998 -0.0295"/>
     <axis rpy="0 0 0" xyz="0 0 -1"/>
+    <dynamics damping="0.2"/>
   </joint>
   <link name="LEFT_REAR_WHEEL">
     <collision>
@@ -216,6 +217,7 @@
     <child link="RIGHT_REAR_WHEEL"/>
     <origin rpy="1.5707963267948966 0 0" xyz="-0.162 -0.19349999999999998 -0.0295"/>
     <axis rpy="0 0 0" xyz="0 0 -1"/>
+    <dynamics damping="0.2"/>
   </joint>
   <link name="RIGHT_REAR_WHEEL">
     <collision>
@@ -303,7 +305,7 @@
   <gazebo reference="lidar_link">
     <sensor name="gpu_lidar" type="gpu_lidar">
       <topic>/scan</topic>
-      <update_rate>400</update_rate>
+      <update_rate>20</update_rate>
       <alwaysOn>1</alwaysOn>
       <visualize>true</visualize>
       <ignition_frame_id>lidar_link</ignition_frame_id>
@@ -323,8 +325,8 @@
           </vertical>
         </scan>
         <range>
-          <min>0.08</min>
-          <max>10</max>
+          <min>0.5</min>
+          <max>50</max>
           <resolution>0.01</resolution>
         </range>
         <noise>
@@ -332,6 +334,7 @@
           <mean>0.0</mean>
           <stddev>0.001</stddev>
         </noise>
+        <visibility_mask>4294967294</visibility_mask>
       </lidar>
     </sensor>
   </gazebo>
