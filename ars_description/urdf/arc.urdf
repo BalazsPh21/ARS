@@ -64,7 +64,7 @@
     <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
         </plugin>
     <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
-      <render_engine>ogre2</render_engine>
+      <render_engine>ogre</render_engine>
     </plugin>
   </gazebo>
   <link name="base_link"/>
@@ -309,33 +309,32 @@
       <alwaysOn>1</alwaysOn>
       <visualize>true</visualize>
       <ignition_frame_id>lidar_link</ignition_frame_id>
-      <lidar>
+      <ray>
         <scan>
           <horizontal>
-            <samples>640</samples>
+            <samples>512</samples>
             <resolution>1</resolution>
             <min_angle>-1.396263</min_angle>
             <max_angle>1.396263</max_angle>
           </horizontal>
           <vertical>
-            <samples>1</samples>
+            <samples>32</samples>
             <resolution>1</resolution>
-            <min_angle>0.0</min_angle>
-            <max_angle>0.0</max_angle>
+            <min_angle>-0.785398</min_angle>
+            <max_angle>0.785398</max_angle>
           </vertical>
         </scan>
         <range>
-          <min>0.5</min>
+          <min>0.3</min>
           <max>50</max>
-          <resolution>0.01</resolution>
+          <resolution>0.003</resolution>
         </range>
         <noise>
           <type>gaussian</type>
           <mean>0.0</mean>
           <stddev>0.001</stddev>
         </noise>
-        <visibility_mask>4294967294</visibility_mask>
-      </lidar>
+      </ray>
     </sensor>
   </gazebo>
   <!-- <gazebo reference="lidar_joint">
