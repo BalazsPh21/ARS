@@ -4,6 +4,7 @@ project(ars_bringup)
 
 find_package(ament_cmake REQUIRED)
 find_package(ars_description REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 # Install project launch files
 install(

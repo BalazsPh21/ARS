@@ -15,10 +15,12 @@ This repository is planned to extend the functionality of a [single Ackermann-st
 ## Option 1 - Native on Ubuntu 22.04
 - 
      ```bash
-    sudo apt install ros-humble-ros-gz
-    sudo apt install ros-humble-ros-ign-bridge
-    sudo apt install ros-humble-ign-ros2-control
-    sudo apt install ros-humble-ackermann-steering-controller
+        sudo apt install -y \
+            ros-humble-ros-gz \
+            ros-humble-ros-ign-bridge \
+            ros-humble-ign-ros2-control \
+            ros-humble-ackermann-steering-controller \
+            ros-humble-joint-state-broadcaster
     ```
 - Create a workspace:
     ```bash
